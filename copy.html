@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>코드 복사</title>
+  <script>
+    async function copyCode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const raw = urlParams.get('raw');
+      if (!raw) {
+        alert("raw 파라미터가 필요합니다.");
+        return;
+      }
+
+      try {
+        const res = await fetch(raw);
+        const code = await res.text();
+        await navigator.clipboard.writeText(code);
+        alert("코드가 클립보드에 복사되었습니다!");
+      } catch (e) {
+        alert("복사 실패: " + e);
+      }
+    }
+    window.onload = copyCode;
+  </script>
+</head>
+<body>
+  <p>코드를 복사 중입니다...</p>
+</body>
+</html>
