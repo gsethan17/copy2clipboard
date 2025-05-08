@@ -10,6 +10,7 @@
 			const raw = urlParams.get('raw');
 			if (!raw) {
 				alert("The 'raw' parameter is required.");
+				window.close();
 				return;
 			}
 
@@ -18,8 +19,10 @@
 				const code = await res.text();
 				await navigator.clipboard.writeText(code);
 				alert("Copied code to clipboard!");
+				window.close();
 			} catch (e) {
 				alert("Copy failed: " + e);
+				window.close();
 			}
 		}
 		window.onload = copyCode;
