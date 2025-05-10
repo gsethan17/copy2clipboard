@@ -7,14 +7,18 @@
 		async function copyCode() {
 			const urlParams = new URLSearchParams(window.location.search);
 			const raw = urlParams.get('raw');
+			
 			if (!raw) {
 				alert("The 'raw' parameter is required.");
 				window.close();
-				return;
+			} else {
+				return raw;
 			}
+		}
 
+		async function copyCode(url) {
 			try {
-				const res = await fetch(raw);
+				const res = await fetch(url);
 				const code = await res.text();
 				await navigator.clipboard.writeText(code);
 				alert("Copied code to clipboard!");
@@ -24,7 +28,13 @@
 				window.close();
 			}
 		}
-		window.onload = copyCode;
+
+		async function msin() {
+			const url = getSourcecodeURL();
+			await copyCode(url);
+		}
+		
+		window.onload = main;
 	</script>
 </head>
 	<body>
