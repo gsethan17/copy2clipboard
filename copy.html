@@ -11,7 +11,6 @@
 			if (!raw) {
 				alert("The 'raw' parameter is required.");
 				window.close();
-				return null;
 			} else {
 				return raw;
 			}
@@ -32,7 +31,6 @@
 
 		async function msin() {
 			const raw = getRawParam();
-			if (!raw) return;
 			await copy2clipboard(raw);
 		}
 		
