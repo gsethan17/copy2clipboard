@@ -4,23 +4,19 @@
 	<meta charset="UTF-8">
 	<title>Copy to Clipboard</title>
 	<script>
-		async function getRawParam() {
+		async function copyCode() {
 			const urlParams = new URLSearchParams(window.location.search);
 			const raw = urlParams.get('raw');
-			
 			if (!raw) {
 				alert("The 'raw' parameter is required.");
 				window.close();
-			} else {
-				return raw;
+				return;
 			}
-		}
 
-		async function copy2clipboard(raw) {
 			try {
 				const res = await fetch(raw);
-				const text_contents = await res.text();
-				await navigator.clipboard.writeText(text_contents);
+				const code = await res.text();
+				await navigator.clipboard.writeText(code);
 				alert("Copied code to clipboard!");
 				window.close();
 			} catch (e) {
@@ -28,13 +24,7 @@
 				window.close();
 			}
 		}
-
-		async function msin() {
-			const raw = getRawParam();
-			await copy2clipboard(raw);
-		}
-		
-		window.onload = main;
+		window.onload = copyCode;
 	</script>
 </head>
 	<body>
