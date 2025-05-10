@@ -6,14 +6,14 @@
 	<script>
 		async function copyCode() {
 			const urlParams = new URLSearchParams(window.location.search);
-			const url = urlParams.get('CodeURL');
-			if (!url) {
-				alert("The 'CodeURL' parameter is required!");
+			const raw = urlParams.get('raw');
+			if (!raw) {
+				alert("The 'raw' parameter is required!");
 				window.close();
 			}
 
 			try {
-				const res = await fetch(url);
+				const res = await fetch(raw);
 				const code = await res.text();
 				await navigator.clipboard.writeText(code);
 				alert("Copied code to clipboard!");
